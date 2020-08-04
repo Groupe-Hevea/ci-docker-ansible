@@ -24,15 +24,4 @@ RUN echo 'deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main' > /et
     apt-get update && \
     apt-get install -y ansible
 
-# Default user
-ENV ANSIBLE_USER ansible-runner
-
-RUN groupadd --gid 1000 $ANSIBLE_USER && useradd --uid 1000 --gid $ANSIBLE_USER --create-home --shell /bin/sh $ANSIBLE_USER
-
-USER $ANSIBLE_USER
-
-WORKDIR /home/$ANSIBLE_USER
-
-RUN mkdir /home/$ANSIBLE_USER/.ssh
-
 CMD ["ansible", "--version"]
