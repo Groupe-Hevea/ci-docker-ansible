@@ -16,7 +16,8 @@ RUN apt-get install -y --no-install-recommends \
     python-jinja2 \
     python-paramiko \
     python-httplib2 \
-    python-six
+    python-six \
+    git
 
 # Installs Ansible
 RUN echo 'deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main' > /etc/apt/sources.list && \
