@@ -17,6 +17,7 @@ RUN apt-get install -y --no-install-recommends \
     python-paramiko \
     python-httplib2 \
     python-six \
+    python-pip \
     git
 
 # Installs Ansible
