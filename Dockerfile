@@ -1,4 +1,6 @@
-FROM debian:buster
+FROM debian:10.6
+
+ARG ANSIBLE_VERSION
 
 # Dependencies upgrade
 RUN export DEBIAN_FRONTEND=noninteractive && \
@@ -7,23 +9,20 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 # Installs ansible requirements
 RUN apt-get install -y --no-install-recommends \
+    python3 \
+    python3-distutils \
+    ca-certificates \
     openssh-client \
     gnupg2 \
     sshpass \
-    python-setuptools \
-    python-crypto \
-    python-yaml \
-    python-jinja2 \
-    python-paramiko \
-    python-httplib2 \
-    python-six \
-    python-pip \
-    git
+    git \
+    curl \
+    unzip
 
-# Installs Ansible
-RUN echo 'deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main' >> /etc/apt/sources.list && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 && \
-    apt-get update && \
-    apt-get install -y ansible
+# Install ansible
+RUN curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
+    chmod +x /tmp/get-pip.py && \
+    $(which python3) /tmp/get-pip.py && \
+    pip install -I ansible==${ANSIBLE_VERSION}
 
 CMD ["ansible", "--version"]

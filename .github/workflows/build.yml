@@ -1,0 +1,42 @@
+name: build
+
+on:
+#  push:
+#    branches: master
+  pull_request:
+
+env:
+  IMAGE_NAME: ci-docker-ansible
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ansible_version:
+          - '2.9'
+          - '2.10'
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: ANSIBLE_VERSION=${{ matrix.ansible_version }} make build
+
+      - name: Log into GitHub Container Registry
+        run: echo "${{ secrets.PUBLIC_REPO_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push image to GitHub Container Registry
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+          VERSION=${{ matrix.ansible_version}}-latest
+
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+
+          DOCKER_TAG=$IMAGE_ID:$VERSION make tag
+          DOCKER_TAG=$IMAGE_ID:$VERSION make push
