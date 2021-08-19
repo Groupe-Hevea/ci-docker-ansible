@@ -1,6 +1,6 @@
-FROM debian:10.6
+FROM debian:10
 
-ARG ANSIBLE_VERSION
+LABEL org.opencontainers.image.source https://github.com/Groupe-Hevea/ci-docker-ansible
 
 # Dependencies upgrade
 RUN export DEBIAN_FRONTEND=noninteractive && \
@@ -19,10 +19,12 @@ RUN apt-get install -y --no-install-recommends \
     curl \
     unzip
 
+ARG ANSIBLE_VERSION
+
 # Install ansible
-RUN curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
+RUN curl -sSL https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
     chmod +x /tmp/get-pip.py && \
     $(which python3) /tmp/get-pip.py && \
-    pip install -I ansible==${ANSIBLE_VERSION}
+    pip install -I ansible==${ANSIBLE_VERSION}.*
 
 CMD ["ansible", "--version"]

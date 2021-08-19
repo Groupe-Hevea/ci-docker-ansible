@@ -1,9 +1,9 @@
 name: build
 
 on:
-#  push:
-#    branches: master
-  pull_request:
+  schedule:
+    - cron:  '0 0 * * MON'
+  workflow_dispatch:
 
 env:
   IMAGE_NAME: ci-docker-ansible
@@ -17,6 +17,8 @@ jobs:
         ansible_version:
           - '2.9'
           - '2.10'
+          - '3.4'
+          - '4.4'
     steps:
       - uses: actions/checkout@v2
 

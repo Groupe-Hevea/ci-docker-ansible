@@ -14,5 +14,6 @@ Simply run `make build`.
 
 | version |          command            |
 |----|----------------------------------|
-|2.9 | `ANSIBLE_VERSION=2.9 make build` |
-|2.10| `ANSIBLE_VERSION=2.10 make build` |
+|2.9.* | `ANSIBLE_VERSION=2.9 make build` |
+|2.10.* | `ANSIBLE_VERSION=2.10 make build` |
+|3.4.* | `ANSIBLE_VERSION=3.4 make build` |
