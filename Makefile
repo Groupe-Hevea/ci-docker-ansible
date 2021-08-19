@@ -1,7 +1,6 @@
-DOCKER_IMAGE?=ci-docker-ansible
+DOCKER_IMAGE?=ghcr.io/groupe-hevea/ci-docker-ansible
 ANSIBLE_VERSION?=2.10
 DOCKER_TAG?=$(DOCKER_IMAGE):$(ANSIBLE_VERSION)-latest
-
 
 .PHONY: build
 build: ## builds the image locally
