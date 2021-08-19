@@ -9,7 +9,3 @@ build: ## builds the image locally
 .PHONY: push
 push: ## pushes the image to the registry
 	docker push $(DOCKER_TAG)
-
-.PHONY: tag
-tag: ## tag an image
-	docker tag $(DOCKER_IMAGE) $(DOCKER_TAG)

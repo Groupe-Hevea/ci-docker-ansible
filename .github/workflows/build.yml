@@ -40,5 +40,4 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
-          DOCKER_TAG=$IMAGE_ID:$VERSION make tag
           DOCKER_TAG=$IMAGE_ID:$VERSION make push
