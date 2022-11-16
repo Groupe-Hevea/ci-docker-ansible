@@ -17,7 +17,8 @@ RUN apt-get install -y --no-install-recommends \
     sshpass \
     git \
     curl \
-    unzip
+    unzip \
+    bzip2
 
 ARG ANSIBLE_VERSION
 
