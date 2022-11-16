@@ -1,4 +1,4 @@
-FROM debian:10
+FROM debian:11
 
 LABEL org.opencontainers.image.source https://github.com/Groupe-Hevea/ci-docker-ansible
 
