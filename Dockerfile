@@ -11,6 +11,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 RUN apt-get install -y --no-install-recommends \
     python3 \
     python3-distutils \
+    python3-jmespath \
     ca-certificates \
     openssh-client \
     gnupg2 \
